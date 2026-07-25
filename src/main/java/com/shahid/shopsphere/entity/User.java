@@ -35,9 +35,16 @@ private String password;
 private Role role;
 }
 /*
+"Why shouldn't we use @Data on JPA entities?"
+
+A solid answer is:
+
+"@Data generates equals(), hashCode(), and toString() automatically. In JPA entities, these methods can cause issues with lazy loading, entity identity, and persistence behavior. That's why many production projects prefer @Getter and 
+@Setter with only the additional methods they explicitly need."
 📖 Let's understand every annotation
 @Entity
 @Entity
+
 
 This tells Hibernate:
 

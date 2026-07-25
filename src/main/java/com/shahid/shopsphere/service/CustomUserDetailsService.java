@@ -21,7 +21,7 @@ public UserDetails loadUserByUsername(String email) throws UsernameNotFoundExcep
 {
     User user = userRepository.findByEmail(email).orElseThrow(()->new UsernameNotFoundException(("User Not Found.")));
     return org.springframework.security.core.userdetails.User
-                                                           .withUsername(user.getName())
+                                                           .withUsername(user.getEmail())
                                                            .password(user.getPassword())
                                                            .roles(user.getRole().name())
                                                            .build();

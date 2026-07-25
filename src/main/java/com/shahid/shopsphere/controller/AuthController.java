@@ -8,13 +8,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shahid.shopsphere.dto.ApiResponseDto;
-import com.shahid.shopsphere.dto.LoginRequest;
-import com.shahid.shopsphere.dto.LoginResponse;
-import com.shahid.shopsphere.dto.RegisterRequest;
-
+import com.shahid.shopsphere.dto.auth.ApiResponseDto;
+import com.shahid.shopsphere.dto.auth.LoginRequest;
+import com.shahid.shopsphere.dto.auth.LoginResponse;
+import com.shahid.shopsphere.dto.auth.RegisterRequest;
 import com.shahid.shopsphere.service.UserService;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;

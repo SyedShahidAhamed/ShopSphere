@@ -11,9 +11,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.shahid.shopsphere.dto.LoginRequest;
-import com.shahid.shopsphere.dto.LoginResponse;
-import com.shahid.shopsphere.dto.RegisterRequest;
+import com.shahid.shopsphere.dto.auth.LoginRequest;
+import com.shahid.shopsphere.dto.auth.LoginResponse;
+import com.shahid.shopsphere.dto.auth.RegisterRequest;
 import com.shahid.shopsphere.entity.Role;
 import com.shahid.shopsphere.entity.User;
 import com.shahid.shopsphere.exception.InvalidCredentialsException;

@@ -1,8 +1,8 @@
 package com.shahid.shopsphere.service;
 
-import com.shahid.shopsphere.dto.LoginRequest;
-import com.shahid.shopsphere.dto.LoginResponse;
-import com.shahid.shopsphere.dto.RegisterRequest;
+import com.shahid.shopsphere.dto.auth.LoginRequest;
+import com.shahid.shopsphere.dto.auth.LoginResponse;
+import com.shahid.shopsphere.dto.auth.RegisterRequest;
 
 
 public interface UserService {

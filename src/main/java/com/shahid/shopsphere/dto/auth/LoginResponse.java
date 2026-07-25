@@ -1,4 +1,4 @@
-package com.shahid.shopsphere.dto;
+package com.shahid.shopsphere.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

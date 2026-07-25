@@ -32,7 +32,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     ) throws ServletException, java.io.IOException
     {
        //This line reads the header.
-        final String authHeader = request.getHeader("Authorised");
+        final String authHeader = request.getHeader("Authorization");
         //check if it has bearer
         if(authHeader == null || !authHeader.startsWith("Bearer "))
         {
@@ -64,9 +64,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 //Store authentication.
                 SecurityContextHolder.getContext().setAuthentication(authToken);
                 //continue to filter
-                filterChain.doFilter(request,response);
             }
          }
+         filterChain.doFilter(request,response);
 
     }
 }
