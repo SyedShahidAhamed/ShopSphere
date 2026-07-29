@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.hibernate.validator.internal.metadata.aggregated.rule.VoidMethodsMustNotBeReturnValueConstrained;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.shahid.shopsphere.dto.auth.ApiResponseDto;
 import com.shahid.shopsphere.dto.responses.ErrorResponse;
+
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -115,6 +115,29 @@ public ResponseEntity<ApiResponseDto<Void>> handleGlobalException(Exception ex) 
                                                                      .message(ex.getMessage())
                                                                      .timeStamp(LocalDateTime.now())
                                                                      .build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+   }
+
+   @ExceptionHandler(BadRequestException.class)
+   public ResponseEntity<ApiResponseDto<Void>> handleBadRequest(BadRequestException ex)
+   {
+        ApiResponseDto<Void> response = ApiResponseDto.<Void>builder()
+                                                      .success(false)
+                                                      .message(ex.getMessage())
+                                                      .timeStamp(LocalDateTime.now())
+                                                      .build();
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+   }
+   @ExceptionHandler(ForbiddenException.class)
+   public ResponseEntity<ApiResponseDto<Void>> handleBadRequest(ForbiddenException ex)
+   {
+        ApiResponseDto<Void> response = ApiResponseDto.<Void>builder()
+                                                      .success(false)
+                                                      .message(ex.getMessage())
+                                                      .timeStamp(LocalDateTime.now())
+                                                      .build();
+
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
    }
 }

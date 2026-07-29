@@ -1,44 +1,39 @@
 package com.shahid.shopsphere.service.imp1;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.shahid.shopsphere.service.ProductService;
-
-import lombok.RequiredArgsConstructor;
-
+import com.shahid.shopsphere.dto.page.PageResponse;
 import com.shahid.shopsphere.dto.product.ProductRequest;
 import com.shahid.shopsphere.dto.product.ProductResponse;
 import com.shahid.shopsphere.entity.Category;
 import com.shahid.shopsphere.entity.Product;
+import com.shahid.shopsphere.exception.BadRequestException;
 import com.shahid.shopsphere.exception.ProductAlreadyExistsException;
 import com.shahid.shopsphere.exception.ResourceNotFoundException;
+import com.shahid.shopsphere.mapper.ProductMapper;
 import com.shahid.shopsphere.repository.CategoryRepository;
 import com.shahid.shopsphere.repository.ProductRepository;
+import com.shahid.shopsphere.service.ProductService;
+import com.shahid.shopsphere.specifications.ProductSpecification;
+import com.shahid.shopsphere.util.SortUtil;
+
+import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImp1 implements ProductService {
    private final ProductRepository productRepository;
    private final CategoryRepository categoryRepository;
-
-   public ProductResponse mapToProductResponse(Product product)
-   {
-       return ProductResponse.builder()
-                             .id(product.getId())
-                             .name(product.getName())
-                             .description(product.getDescription())
-                             .price(product.getPrice())
-                             .stock(product.getStock())
-                             .brand(product.getBrand())
-                             .active(product.getActive())
-                             .imageUrl(product.getImageUrl())
-                             .categoryId(product.getCategory().getId())
-                             .categoryName(product.getCategory().getName())
-                             .createdAt(product.getCreatedAt())
-                             .updatedAt(product.getUpdatedAt())
-                             .build();
-   }
+   private  final ProductMapper productMapper;
+   private final SortUtil sortUtil;
+   
 
   @Override
 public ProductResponse createProduct(ProductRequest request) {
@@ -52,27 +47,84 @@ public ProductResponse createProduct(ProductRequest request) {
             .orElseThrow(() ->
                     new ResourceNotFoundException("Category not found."));
  //buildproduct
-    Product product = Product.builder()
-            .name(request.getName())
-            .description(request.getDescription())
-            .price(request.getPrice())
-            .stock(request.getStock())
-            .brand(request.getBrand())
-            .imageUrl(request.getImageUrl())
-            .active(true)
-            .category(category)
-            .build();
+    Product product = productMapper.toProduct(request, category);
+        
  //now save
     Product savedProduct = productRepository.save(product);
  
-    return mapToProductResponse(savedProduct);
+    return productMapper.toProductResponse(savedProduct);
 } 
+
+
   @Override
-   public List<ProductResponse> getAllProducts()
+   public PageResponse<ProductResponse> getAllProducts(
+     int page,
+        int size,
+        String sortBy,
+        String direction,
+        String category,
+        String brand,
+        BigDecimal minPrice,
+        BigDecimal maxPrice,
+        String keyword)
    {
-      return productRepository.findAll().stream()
-                                        .map(this::mapToProductResponse) 
-                                        .toList();
+      sortBy = sortBy.trim();
+direction = direction.trim().toLowerCase();
+      //checksortby
+      if(!sortUtil.ALLOWED_SORT_FIELDS.contains(sortBy.toLowerCase()))
+      {
+        
+          throw new BadRequestException("Invalid sort field: " + sortBy);
+
+      }
+      //checkdirection
+      if(!sortUtil.ALLOWED_DIRECTIONS.contains(direction.toLowerCase()))
+      {
+         throw new BadRequestException("Invalid direction field: "+ direction);
+      }
+      //check page req
+      if (page < 0) {
+            throw new BadRequestException("Page number cannot be negative.");
+         }
+
+         if (size <= 0 || size > 100) {
+            throw new BadRequestException(
+                     "Page size must be between 1 and 100.");
+         }
+             
+             
+         //sort logic
+       Sort.Direction sortDirection = Sort.Direction.fromString(direction);
+       Sort sort = Sort.by(sortDirection,sortBy);
+            //page
+            PageRequest pageable =PageRequest.of(page, size,sort);
+            System.out.println("Category  : " + category);
+System.out.println("Brand     : " + brand);
+System.out.println("Keyword   : " + keyword);
+System.out.println("Min Price : " + minPrice);
+System.out.println("Max Price : " + maxPrice);
+            //specification
+            Specification<Product> specification = Specification
+                                                      .where(ProductSpecification.hasCategory(category)
+                                                      .and(ProductSpecification.hasBrand(brand))
+                                                      .and(ProductSpecification.hasMaxPrice(maxPrice))
+                                                      .and(ProductSpecification.hasMinPrice(minPrice))
+                                                      .and(ProductSpecification.hasKeyword(keyword)));
+      Page<Product>productPage= productRepository.findAll(specification,pageable);
+
+
+
+       //convert to list of product
+       List<ProductResponse> products = productPage.getContent().stream().map(productMapper :: toProductResponse).toList();
+       return PageResponse.<ProductResponse>builder()
+                           .content(products)
+                           .page(productPage.getNumber())
+                                 .size(productPage.getSize())
+                                 .totalElements(productPage.getTotalElements())
+                                 .totalPages(productPage.getTotalPages())
+                                 .first(productPage.isFirst())
+                                 .last(productPage.isLast())
+                                 .build();
    }
 
    @Override
@@ -80,15 +132,14 @@ public ProductResponse createProduct(ProductRequest request) {
 
       Product product = productRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Product Not Found With Id:" +id));
 
-      return mapToProductResponse(product);
+      return productMapper.toProductResponse(product);
    }
     @Override
     public ProductResponse updateProduct(Long id, ProductRequest request){
       //fetch product
        Product product = productRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Product Not Found With Id:" +id));
        //find category
-       Category category = categoryRepository.findById(request.getCategoryId()).orElseThrow(()-> new ResourceNotFoundException("Category Not Found With Id:" + id));
-
+       Category category = categoryRepository.findById(request.getCategoryId()).orElseThrow(()-> new ResourceNotFoundException("Category Not Found With Id:" + request.getCategoryId()));
        //update
         product.setName(request.getName());
         product.setDescription(request.getDescription());
@@ -99,7 +150,7 @@ public ProductResponse createProduct(ProductRequest request) {
         product.setCategory(category);
         //save new product
         Product updatedProduct = productRepository.save(product);
-        return mapToProductResponse(updatedProduct);
+        return productMapper.toProductResponse(updatedProduct);
     }
 
     @Override

@@ -1,7 +1,8 @@
 package com.shahid.shopsphere.service;
 
-import java.util.List;
+import java.math.BigDecimal;
 
+import com.shahid.shopsphere.dto.page.PageResponse;
 import com.shahid.shopsphere.dto.product.ProductRequest;
 import com.shahid.shopsphere.dto.product.ProductResponse;
 
@@ -9,7 +10,16 @@ public interface ProductService {
 
     ProductResponse createProduct(ProductRequest request);
 
-    List<ProductResponse> getAllProducts();
+    PageResponse<ProductResponse> getAllProducts(
+        int page,
+        int size,
+        String sortBy,
+        String direction,
+        String category,
+        String brand,
+        BigDecimal minPrice,
+        BigDecimal maxPrice,
+        String keyword);
 
     ProductResponse getProductById(Long id);
 

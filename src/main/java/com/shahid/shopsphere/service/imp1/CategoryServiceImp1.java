@@ -10,6 +10,7 @@ import com.shahid.shopsphere.dto.category.CategoryResponse;
 import com.shahid.shopsphere.entity.Category;
 import com.shahid.shopsphere.exception.CategoryAlreadyExistsException;
 import com.shahid.shopsphere.exception.ResourceNotFoundException;
+import com.shahid.shopsphere.mapper.CategoryMapper;
 import com.shahid.shopsphere.repository.CategoryRepository;
 import com.shahid.shopsphere.service.CategoryService;
 
@@ -21,19 +22,8 @@ public class CategoryServiceImp1 implements CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-
-    private CategoryResponse mapToResponse(Category category)
-    {
-        return   CategoryResponse.builder()
-                               .id(category.getId())
-                               .name(category.getName())
-                               .description(category.getDescription())
-                               .active(category.getActive())
-                               .createdAt(category.getCreatedAt())
-                               .updatedAt(category.getUpdatedAt())
-                               .build();
-
-    }
+    private final CategoryMapper categoryMapper;
+   
    @Override
     public CategoryResponse createCategory(CategoryRequest request)
     {
@@ -52,7 +42,7 @@ public class CategoryServiceImp1 implements CategoryService {
         //save
         Category savedCategory = categoryRepository.save(category);
 
-        return mapToResponse(savedCategory);
+        return categoryMapper.toCategoryResponse(savedCategory);
         
     }
    @Override
@@ -60,7 +50,7 @@ public class CategoryServiceImp1 implements CategoryService {
     {
         return categoryRepository.findAll()
                             .stream()
-                            .map(category -> mapToResponse(category))
+                            .map(categoryMapper::toCategoryResponse)
                              .toList();
                                     
     }
@@ -69,7 +59,7 @@ public class CategoryServiceImp1 implements CategoryService {
     {
       Category category = categoryRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Category Not Found With Id:" + id));
 
-       return mapToResponse(category);
+       return categoryMapper.toCategoryResponse(category);
     }
     
     @Override
@@ -82,7 +72,7 @@ public class CategoryServiceImp1 implements CategoryService {
 
          Category updatedCategory = categoryRepository.save(category);
            
-         return mapToResponse(updatedCategory);
+         return categoryMapper.toCategoryResponse(updatedCategory);
 
 
     }
