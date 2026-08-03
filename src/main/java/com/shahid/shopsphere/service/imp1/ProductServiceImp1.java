@@ -2,7 +2,6 @@ package com.shahid.shopsphere.service.imp1;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -98,11 +97,7 @@ direction = direction.trim().toLowerCase();
        Sort sort = Sort.by(sortDirection,sortBy);
             //page
             PageRequest pageable =PageRequest.of(page, size,sort);
-            System.out.println("Category  : " + category);
-System.out.println("Brand     : " + brand);
-System.out.println("Keyword   : " + keyword);
-System.out.println("Min Price : " + minPrice);
-System.out.println("Max Price : " + maxPrice);
+            
             //specification
             Specification<Product> specification = Specification
                                                       .where(ProductSpecification.hasCategory(category)
