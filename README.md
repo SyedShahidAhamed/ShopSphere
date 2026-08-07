@@ -477,7 +477,7 @@ http://localhost:8080/v3/api-docs
 **Syed Shahid Ahamed**
 
 - GitHub: https://github.com/SyedShahidAhamed
-- LinkedIn: *(Add your LinkedIn URL here)*
+- LinkedIn: https://www.linkedin.com/in/syed-shahid-ahamed-0717423a9/
 
 ---
 
