@@ -1,14 +1,15 @@
-# 🛒 ShopSphere
+# 🛒 ShopSphere - Spring Boot E-Commerce REST API
 
-A production-style E-Commerce REST API built using Spring Boot, Spring Security, JWT Authentication, and Spring Data JPA.
+A production-ready **E-Commerce REST API** built using **Spring Boot**, **Spring Security (JWT)**, **Spring Data JPA**, **MySQL**, **Docker**, and **Docker Compose**.
 
-The project follows a clean layered architecture and implements industry-standard backend practices such as DTOs, Mapper Pattern, Pagination, Sorting, Dynamic Filtering, Validation, and Global Exception Handling.
+The project follows **Clean Layered Architecture** and demonstrates industry-standard backend development practices including authentication, CRUD operations, pagination, sorting, dynamic filtering, validation, testing, and containerized deployment.
 
 ---
 
-## 🚀 Features
+# 🚀 Features
 
-### 🔐 Authentication & Security
+## 🔐 Authentication & Authorization
+
 - User Registration
 - User Login
 - JWT Authentication
@@ -16,7 +17,10 @@ The project follows a clean layered architecture and implements industry-standar
 - Role-Based Authorization
 - BCrypt Password Encryption
 
-### 📦 Product Management
+---
+
+## 📦 Product Management
+
 - Create Product
 - Update Product
 - Delete Product
@@ -27,27 +31,47 @@ The project follows a clean layered architecture and implements industry-standar
 - Dynamic Filtering (JPA Specifications)
 - Keyword Search
 
-### 📂 Category Management
+---
+
+## 📂 Category Management
+
 - Create Category
 - Update Category
 - Delete Category
-- Get Categories
+- Get Category by ID
+- Get All Categories
 
-### 🛒 Cart Management
+---
+
+## 🛒 Cart Management
+
 - Add Product to Cart
-- Update Cart Quantity
-- Remove Product from Cart
+- Update Quantity
+- Remove Product
 - View User Cart
+- Calculate Total Amount
 
-### 📋 Order Management
+---
+
+## 📦 Order Management
+
 - Place Order
 - View Orders
 - Cancel Order
+- Order Status Management
 
-### 💳 Payment
-- Payment Module
+---
 
-### 🛠 Backend Features
+## 💳 Payment Module
+
+- Payment Entity
+- Payment Status
+- Payment Method
+
+---
+
+## 🛠 Backend Features
+
 - DTO Pattern
 - Mapper Pattern
 - Bean Validation
@@ -55,31 +79,166 @@ The project follows a clean layered architecture and implements industry-standar
 - Custom Exceptions
 - Pagination
 - Sorting
-- Dynamic Filtering
+- Dynamic Filtering (Specification API)
 - Clean Layered Architecture
 
 ---
 
-## 🛠 Tech Stack
+# 🧪 Testing
+
+The project includes comprehensive testing using:
+
+- ✅ Unit Testing
+- ✅ Repository Testing
+- ✅ Controller Testing
+- ✅ Integration Testing
+
+### Frameworks
+
+- JUnit 5
+- Mockito
+- Spring Boot Test
+- MockMvc
+- H2 Database (Testing)
+
+---
+
+# 🐳 Docker Support
+
+The application is fully containerized using Docker.
+
+### Implemented
+
+- Dockerfile
+- Docker Compose
+- MySQL Container
+- Spring Boot Container
+- Docker Networking
+- Docker Volumes (Persistent Database)
+
+---
+
+# 🏗 Project Architecture
+
+```
+                Client
+
+                  │
+
+                  ▼
+
+        Spring Boot REST API
+
+                  │
+
+                  ▼
+
+          Spring Security
+
+                  │
+
+                  ▼
+
+              Service Layer
+
+                  │
+
+                  ▼
+
+               Mapper Layer
+
+                  │
+
+                  ▼
+
+           Repository Layer
+
+                  │
+
+                  ▼
+
+        Spring Data JPA
+
+                  │
+
+                  ▼
+
+              MySQL Database
+```
+
+---
+
+# 🐳 Docker Architecture
+
+```
+                 Docker Compose
+
+      ┌─────────────────────────────┐
+
+      │      ShopSphere API         │
+
+      └─────────────┬───────────────┘
+                    │
+         JDBC (mysql:3306)
+                    │
+                    ▼
+
+      ┌─────────────────────────────┐
+      │      MySQL Database         │
+      └─────────────┬───────────────┘
+                    │
+                    ▼
+
+          Docker Volume
+         (Persistent Storage)
+```
+
+---
+
+# 🛠 Tech Stack
+
+### Backend
 
 - Java 21
 - Spring Boot 3
 - Spring Security
+- JWT Authentication
 - Spring Data JPA
 - Hibernate
-- MySQL
 - Maven
-- JWT (JSON Web Token)
+
+### Database
+
+- MySQL
+- H2 Database (Testing)
+
+### Testing
+
+- JUnit 5
+- Mockito
+- MockMvc
+
+### DevOps
+
+- Docker
+- Docker Compose
+
+### Documentation
+
+- Swagger / OpenAPI
+
+### Utilities
+
 - Lombok
 - Bean Validation
-- Swagger / OpenAPI
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
 ```
 src/main/java
+
 │
 ├── config
 ├── controller
@@ -97,39 +256,18 @@ src/main/java
 
 ---
 
-## 🏗 Architecture
+# 📌 REST API Endpoints
 
-```
-Controller
-      │
-      ▼
-Service
-      │
-      ▼
-Mapper
-      │
-      ▼
-Repository
-      │
-      ▼
-Specification
-      │
-      ▼
-MySQL Database
-```
-
----
-
-## 📌 API Endpoints
-
-### Authentication
+## Authentication
 
 ```
 POST   /api/auth/register
 POST   /api/auth/login
 ```
 
-### Categories
+---
+
+## Categories
 
 ```
 GET    /api/categories
@@ -139,7 +277,9 @@ PUT    /api/categories/{id}
 DELETE /api/categories/{id}
 ```
 
-### Products
+---
+
+## Products
 
 ```
 GET    /api/products
@@ -149,7 +289,7 @@ PUT    /api/products/{id}
 DELETE /api/products/{id}
 ```
 
-Supports:
+### Supports
 
 ```
 ?page=0
@@ -163,7 +303,9 @@ Supports:
 &keyword=iphone
 ```
 
-### Cart
+---
+
+## Cart
 
 ```
 GET    /api/cart
@@ -172,7 +314,9 @@ PUT    /api/cart/{id}
 DELETE /api/cart/{id}
 ```
 
-### Orders
+---
+
+## Orders
 
 ```
 POST   /api/orders
@@ -180,7 +324,9 @@ GET    /api/orders
 PUT    /api/orders/{id}/cancel
 ```
 
-### Payments
+---
+
+## Payments
 
 ```
 POST   /api/payments
@@ -189,12 +335,14 @@ GET    /api/payments/{id}
 
 ---
 
-## ⚙️ Getting Started
+# ⚙️ Running the Project
+
+## Option 1 : Run using Docker (Recommended)
 
 ### Clone Repository
 
 ```bash
-git clone https://github.com/your-username/ShopSphere.git
+git clone https://github.com/SyedShahidAhamed/ShopSphere.git
 ```
 
 ### Navigate
@@ -203,9 +351,47 @@ git clone https://github.com/your-username/ShopSphere.git
 cd ShopSphere
 ```
 
-### Configure Database
+### Build the Project
 
-Update `application.properties`:
+```bash
+mvn clean package
+```
+
+### Start Containers
+
+```bash
+docker compose up
+```
+
+Run in Background
+
+```bash
+docker compose up -d
+```
+
+Stop Containers
+
+```bash
+docker compose down
+```
+
+The application will be available at:
+
+```
+http://localhost:8080
+```
+
+---
+
+# Option 2 : Run Locally
+
+Configure MySQL in
+
+```
+application.properties
+```
+
+Example
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/shopsphere
@@ -213,7 +399,7 @@ spring.datasource.username=root
 spring.datasource.password=your_password
 ```
 
-### Run
+Run
 
 ```bash
 mvn spring-boot:run
@@ -221,15 +407,15 @@ mvn spring-boot:run
 
 ---
 
-## 📸 API Documentation
+# 📚 API Documentation
 
-Swagger UI
+### Swagger UI
 
 ```
 http://localhost:8080/swagger-ui/index.html
 ```
 
-OpenAPI Docs
+### OpenAPI Docs
 
 ```
 http://localhost:8080/v3/api-docs
@@ -237,20 +423,62 @@ http://localhost:8080/v3/api-docs
 
 ---
 
-## 🔮 Future Improvements
+# 📊 Project Status
 
-- Docker
-- JUnit 5
-- Mockito
-- Integration Testing
-- React Frontend
-- Razorpay Integration
-- Deployment (Render / Railway / AWS)
+✅ Authentication
+
+✅ Authorization
+
+✅ Product Module
+
+✅ Category Module
+
+✅ Cart Module
+
+✅ Order Module
+
+✅ Payment Module
+
+✅ Pagination
+
+✅ Sorting
+
+✅ Dynamic Filtering
+
+✅ Validation
+
+✅ Exception Handling
+
+✅ JWT Security
+
+✅ Testing
+
+✅ Docker
+
+✅ Docker Compose
 
 ---
 
-## 👨‍💻 Author
+# 🔮 Future Enhancements
+
+- Redis Caching
+- Email Notifications
+- Payment Gateway Integration (Razorpay/Stripe)
+- CI/CD using GitHub Actions
+- Cloud Deployment (AWS / Render / Railway)
+- React Frontend
+- Microservices Architecture
+- Kubernetes Deployment
+
+---
+
+# 👨‍💻 Author
 
 **Syed Shahid Ahamed**
 
-GitHub: https://github.com/SyedShahidAhamed
+- GitHub: https://github.com/SyedShahidAhamed
+- LinkedIn: *(Add your LinkedIn URL here)*
+
+---
+
+# ⭐ If you found this project useful, don't forget to star the repository!
