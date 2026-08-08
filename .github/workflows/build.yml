@@ -26,6 +26,8 @@ jobs:
           cache: maven
 
       - name: Build and Test with Maven
+        env :
+          JWT_SECRETE: ${{secrets.JWT_SECRET}}
         run: mvn clean verify
 
       - name: Login to Docker Hub
