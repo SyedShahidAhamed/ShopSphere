@@ -9,16 +9,17 @@ services:
       MYSQL_DATABASE: shopsphere
 
     ports:
-      - "3306:3306"
+      - "3307:3306"
 
     volumes:
       - mysql-data:/var/lib/mysql
-     
+
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pking@786"]
       interval: 10s
       timeout: 5s
-      retries: 10 
+      retries: 10
+
 
   shopsphere:
     build:
@@ -26,11 +27,21 @@ services:
 
     container_name: shopsphere-app
 
+    environment:
+    
+      DB_URL: ${DB_URL}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION: ${JWT_EXPIRATION}
+      
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
 
     ports:
       - "8080:8080"
+
 
 volumes:
   mysql-data:
