@@ -67,7 +67,7 @@ public class CategoryController {
 })
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    //@PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<List<CategoryResponse>> getAllCategories()
     {
         List<CategoryResponse> categories = categoryService.getAllCategories();
@@ -84,7 +84,7 @@ public class CategoryController {
     @ApiResponse(responseCode = "401", description = "Unauthorized")
 })
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    //@PreAuthorize("hasAnyRole('USER','ADMIN')")
     public ResponseEntity<CategoryResponse> getCategoryById(
         @Parameter(
     description = "Unique ID of the category",example = "1")

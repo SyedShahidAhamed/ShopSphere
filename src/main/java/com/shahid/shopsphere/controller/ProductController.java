@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,7 +61,7 @@ public class ProductController {
          @ApiResponse(responseCode = "500", description = "Internal Server Error")
    })
    @GetMapping
-   @PreAuthorize("hasAnyRole('USER','ADMIN')")
+     // @PreAuthorize("hasAnyRole('USER','ADMIN')")
    public ResponseEntity<PageResponse<ProductResponse>> getAllProducts(
          @Parameter(description = "Page Number", example = "0") @RequestParam(defaultValue = "0") int page,
 
@@ -95,7 +94,7 @@ public class ProductController {
          @ApiResponse(responseCode = "401", description = "unauthorized")
    })
    @GetMapping("/{id}")
-   @PreAuthorize("hasAnyRole('USER','ADMIN')")
+   //@PreAuthorize("hasAnyRole('USER','ADMIN')")
    public ResponseEntity<ProductResponse> getProductById(
          @Parameter(description = "Product Id", example = "1") @PathVariable Long id) {
       ProductResponse productResponse = productService.getProductById(id);
