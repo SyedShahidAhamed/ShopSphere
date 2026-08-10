@@ -458,6 +458,45 @@ http://localhost:8080/v3/api-docs
 ✅ Docker Compose
 
 ---
+# 🔄 CI/CD Pipeline
+
+ShopSphere uses GitHub Actions to automate the build, testing, Docker image creation, and deployment workflow.
+
+```text
+Developer
+    │
+    ▼
+Git Push to main
+    │
+    ▼
+GitHub Actions
+    │
+    ├── Checkout Repository
+    │
+    ├── Setup Java 21
+    │
+    ├── Maven Build & Tests
+    │       └── mvn clean verify
+    │
+    ├── Build Docker Image
+    │
+    ├── Push Image to Docker Hub
+    │
+    ▼
+Docker Hub
+    │
+    │  shopsphere:latest
+    ▼
+Railway
+    │
+    ├── Detects new Docker image
+    │
+    └── Automatically redeploys
+    │
+    ▼
+🚀 Production Deployment
+
+---
 
 # 🔮 Future Enhancements
 
