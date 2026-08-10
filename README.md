@@ -1,25 +1,52 @@
-# 🛒 ShopSphere - Spring Boot E-Commerce REST API
+# 🛒 ShopSphere - E-Commerce REST API
 
-A production-ready **E-Commerce REST API** built using **Spring Boot**, **Spring Security (JWT)**, **Spring Data JPA**, **MySQL**, **Docker**, and **Docker Compose**.
+A production-ready **E-Commerce REST API** built using **Spring Boot, Spring Security, JWT, Spring Data JPA, MySQL, Docker, Docker Compose, GitHub Actions, Docker Hub, and Railway**.
 
-The project follows **Clean Layered Architecture** and demonstrates industry-standard backend development practices including authentication, CRUD operations, pagination, sorting, dynamic filtering, validation, testing, and containerized deployment.
+ShopSphere demonstrates real-world backend development practices including authentication, role-based authorization, CRUD operations, pagination, sorting, dynamic filtering, validation, exception handling, automated testing, containerization, CI/CD, and cloud deployment.
 
 ---
 
-# 🚀 Features
+## 🌐 Live Application
+
+### Production API
+
+**Railway**
+
+https://renewed-delight-production-de66.up.railway.app
+
+### Swagger UI
+
+https://renewed-delight-production-de66.up.railway.app/swagger-ui/index.html
+
+### OpenAPI Documentation
+
+https://renewed-delight-production-de66.up.railway.app/v3/api-docs
+
+> The application is deployed as a Docker container on Railway and uses Railway MySQL as its production database.
+
+---
+
+# ✨ Features
 
 ## 🔐 Authentication & Authorization
 
 - User Registration
 - User Login
 - JWT Authentication
+- JWT Token Validation
 - Spring Security
 - Role-Based Authorization
+- User Role
+- Admin Role
+- Method-Level Security using `@PreAuthorize`
 - BCrypt Password Encryption
+- Stateless Authentication
+- Protected REST APIs
+- Environment-based JWT configuration
 
 ---
 
-## 📦 Product Management
+# 📦 Product Management
 
 - Create Product
 - Update Product
@@ -28,496 +55,695 @@ The project follows **Clean Layered Architecture** and demonstrates industry-sta
 - Get All Products
 - Pagination
 - Sorting
-- Dynamic Filtering (JPA Specifications)
+- Dynamic Filtering
 - Keyword Search
+- Category Filtering
+- Brand Filtering
+- Minimum Price Filtering
+- Maximum Price Filtering
 
----
+### Example
+'''http
+GET /api/products?page=0&size=10&sortBy=price&direction=desc
 
-## 📂 Category Management
+Category Filter
 
-- Create Category
-- Update Category
-- Delete Category
-- Get Category by ID
-- Get All Categories
+GET /api/products?category=Mobiles
 
----
+Brand Filter
 
-## 🛒 Cart Management
+GET /api/products?brand=Apple
 
-- Add Product to Cart
-- Update Quantity
-- Remove Product
-- View User Cart
-- Calculate Total Amount
+Price Filter
 
----
+GET /api/products?minPrice=50000&maxPrice=150000
 
-## 📦 Order Management
+Keyword Search
 
-- Place Order
-- View Orders
-- Cancel Order
-- Order Status Management
+GET /api/products?keyword=iphone
 
----
+'''
+# 📂 Category Management
+-Create Category
+-Update Category
+-Delete Category
+-Get Category by ID
+-Get All Categories
 
-## 💳 Payment Module
-
-- Payment Entity
-- Payment Status
-- Payment Method
-
----
-
-## 🛠 Backend Features
-
-- DTO Pattern
-- Mapper Pattern
-- Bean Validation
-- Global Exception Handling
-- Custom Exceptions
-- Pagination
-- Sorting
-- Dynamic Filtering (Specification API)
-- Clean Layered Architecture
-
----
-
-# 🧪 Testing
-
-The project includes comprehensive testing using:
-
-- ✅ Unit Testing
-- ✅ Repository Testing
-- ✅ Controller Testing
-- ✅ Integration Testing
-
-### Frameworks
-
-- JUnit 5
-- Mockito
-- Spring Boot Test
-- MockMvc
-- H2 Database (Testing)
-
----
-
-# 🐳 Docker Support
-
-The application is fully containerized using Docker.
-
-### Implemented
-
-- Dockerfile
-- Docker Compose
-- MySQL Container
-- Spring Boot Container
-- Docker Networking
-- Docker Volumes (Persistent Database)
-
----
-
-# 🏗 Project Architecture
-
-```
-                Client
-
-                  │
-
-                  ▼
-
-        Spring Boot REST API
-
-                  │
-
-                  ▼
-
-          Spring Security
-
-                  │
-
-                  ▼
-
-              Service Layer
-
-                  │
-
-                  ▼
-
-               Mapper Layer
-
-                  │
-
-                  ▼
-
-           Repository Layer
-
-                  │
-
-                  ▼
-
-        Spring Data JPA
-
-                  │
-
-                  ▼
-
-              MySQL Database
-```
-
----
-
-# 🐳 Docker Architecture
-
-```
-                 Docker Compose
-
-      ┌─────────────────────────────┐
-
-      │      ShopSphere API         │
-
-      └─────────────┬───────────────┘
-                    │
-         JDBC (mysql:3306)
-                    │
-                    ▼
-
-      ┌─────────────────────────────┐
-      │      MySQL Database         │
-      └─────────────┬───────────────┘
-                    │
-                    ▼
-
-          Docker Volume
-         (Persistent Storage)
-```
-
----
-
-# 🛠 Tech Stack
-
-### Backend
-
-- Java 21
-- Spring Boot 3
-- Spring Security
-- JWT Authentication
-- Spring Data JPA
-- Hibernate
-- Maven
-
-### Database
-
-- MySQL
-- H2 Database (Testing)
-
-### Testing
-
-- JUnit 5
-- Mockito
-- MockMvc
-
-### DevOps
-
-- Docker
-- Docker Compose
-
-### Documentation
-
-- Swagger / OpenAPI
-
-### Utilities
-
-- Lombok
-- Bean Validation
-
----
-
-# 📁 Project Structure
-
-```
-src/main/java
-
-│
-├── config
-├── controller
-├── dto
-├── entity
-├── exception
-├── mapper
-├── repository
-├── security
-├── service
-├── specifications
-├── util
-└── ShopSphereApplication
-```
-
----
-
-# 📌 REST API Endpoints
-
-## Authentication
-
-```
-POST   /api/auth/register
-POST   /api/auth/login
-```
-
----
-
-## Categories
-
-```
+Endpoints
 GET    /api/categories
 GET    /api/categories/{id}
 POST   /api/categories
 PUT    /api/categories/{id}
 DELETE /api/categories/{id}
-```
 
----
+# 🛒 Cart Management
+-Add Product to Cart
+-Update Product Quantity
+-Remove Product from Cart
+-View User Cart
+-Calculate Cart Total
 
-## Products
+Endpoints
+GET    /api/cart
+POST   /api/cart
+PUT    /api/cart/{id}
+DELETE /api/cart/{id}
 
-```
+# 📦 Order Management
+-Place Order
+-View Orders
+-View Order Details
+-Cancel Order
+-Order Status Management
+
+Endpoints
+POST   /api/orders
+GET    /api/orders
+PUT    /api/orders/{id}/cancel
+
+# 💳 Payment Module
+
+The project contains a payment module with payment entities and REST APIs.
+
+Implemented:
+
+-Payment Entity
+-Payment Status
+-Payment Method
+-Payment APIs
+
+Endpoints
+POST /api/payments
+GET  /api/payments/{id}
+
+#🛡️ Security Architecture
+
+-ShopSphere uses Spring Security + JWT for authentication and authorization.
+
+                    Client
+                       │
+                       ▼
+              Authentication API
+                       │
+                       ▼
+                  Login
+                       │
+                       ▼
+                  JWT Token
+                       │
+                       ▼
+          Authorization: Bearer <JWT>
+                       │
+                       ▼
+             JwtAuthenticationFilter
+                       │
+                       ▼
+                JWT Validation
+                       │
+                       ▼
+              SecurityContext
+                       │
+                       ▼
+                  Controller
+                       │
+                       ▼
+                @PreAuthorize
+                       │
+                       ▼
+                Service Layer
+
+Security Components
+        -SecurityConfig
+        -JwtAuthenticationFilter
+        -JwtService
+        -CustomUserDetailsService
+        -PasswordEncoder
+        -DaoAuthenticationProvider
+        -AuthenticationManager
+
+# 🏗️ Application Architecture
+
+ShopSphere follows a clean layered architecture.
+
+                     Client
+                       │
+                       ▼
+              Spring Boot REST API
+                       │
+                       ▼
+             Spring Security / JWT
+                       │
+                       ▼
+                  Controller
+                       │
+                       ▼
+                     DTO
+                       │
+                       ▼
+                   Mapper
+                       │
+                       ▼
+                  Service
+                       │
+                       ▼
+              Specifications
+                       │
+                       ▼
+                 Repository
+                       │
+                       ▼
+                Spring Data JPA
+                       │
+                       ▼
+                    MySQL
+
+# 📁 Project Structure
+
+src/main/java/com/shahid/shopsphere
+│
+├── config
+│   └── SecurityConfig.java
+│
+├── controller
+│   ├── AuthController.java
+│   ├── ProductController.java
+│   ├── CategoryController.java
+│   ├── CartController.java
+│   ├── OrderController.java
+│   └── PaymentController.java
+│
+├── dto
+│
+├── entity
+│
+├── exception
+│
+├── mapper
+│
+├── repository
+│
+├── security
+│   └── JwtAuthenticationFilter.java
+│
+├── service
+│
+├── specifications
+│
+├── util
+│
+└── ShopSphereApplication.java
+
+# 🛠️ Technology Stack
+
+Backend
+-Java 21
+-Spring Boot 3
+-Spring Security
+-JWT
+-Spring Data JPA
+-Hibernate
+-Maven
+-Lombok
+-Bean Validation
+
+Database
+-MySQL
+-H2 Database for Testing
+
+Testing
+-JUnit 5
+-Mockito
+-Spring Boot Test
+-MockMvc
+
+DevOps
+-Docker
+-Docker Compose
+-Docker Hub
+
+GitHub Actions
+-Railway
+
+Documentation
+-Swagger
+-OpenAPI
+
+# 🧪 Testing
+
+ShopSphere includes automated testing at multiple levels.
+
+Unit Testing
+
+Business logic is tested using:
+
+-JUnit 5
+-Mockito
+
+Repository Testing
+
+Repository and persistence functionality can be tested using:
+
+-Spring Data JPA
+-H2 Database
+
+Controller Testing
+
+REST controllers are tested using:
+
+-Spring Boot Test
+-MockMvc
+
+Integration Testing
+
+Integration tests verify the interaction between different application layers.
+
+Maven Verification
+-mvn clean verify
+
+# 🐳 Docker
+
+ShopSphere is fully containerized using Docker.
+
+Docker Components:
+
+                 Docker Compose
+                       │
+             ┌─────────┴─────────┐
+             │                   │
+             ▼                   ▼
+       Spring Boot API         MySQL
+        Container            Container
+             │                   │
+             └─────────┬─────────┘
+                       │
+                       ▼
+                Docker Network
+                       │
+                       ▼
+                 MySQL Volume
+
+Docker Features
+-Dockerfile
+-Docker Compose
+-Spring Boot Container
+-MySQL Container
+-Docker Networking
+-Persistent MySQL Volume
+-Environment-based configuration
+
+# configuration
+# 🔄 CI/CD Pipeline
+
+ShopSphere uses GitHub Actions for automated build and testing.
+
+The CI/CD pipeline also builds and publishes the Docker image.
+
+                       Developer
+                           │
+                           ▼
+                    git push origin main
+                           │
+                           ▼
+                 ┌────────────────────┐
+                 │   GitHub Actions   │
+                 └─────────┬──────────┘
+                           │
+                           ▼
+                  Checkout Repository
+                           │
+                           ▼
+                     Setup Java 21
+                           │
+                           ▼
+                  Maven Build & Tests
+                           │
+                    ┌──────┴──────┐
+                    │             │
+                  PASS           FAIL
+                   ✅              ❌
+                    │             │
+                    ▼             ▼
+              Docker Build       STOP
+                    │
+                    ▼
+              Docker Hub Push
+                    │
+                    ▼
+      shahidjavadev/shopsphere:latest
+                    │
+                    ▼
+                 Railway
+                    │
+                    ▼
+             Production API
+
+⚙️ GitHub Actions
+
+The GitHub Actions workflow performs automated tasks such as:
+
+-Repository checkout
+-Java 21 setup
+-Maven dependency setup
+-Application build
+-Automated tests
+-Docker image build
+-Docker Hub authentication
+-Docker image push
+
+Maven Verification
+-mvn clean verify
+
+Docker Image
+-shahidjavadev/shopsphere:latest
+
+# 🐳 Docker Hub
+
+The ShopSphere Docker image is published to Docker Hub.
+
+Image
+-shahidjavadev/shopsphere:latest
+
+Pull Image
+-docker pull shahidjavadev/shopsphere:latest
+
+Run Container
+-docker run -p 8080:8080 shahidjavadev/shopsphere:latest
+
+# ☁️ Railway Deployment
+
+ShopSphere is deployed to Railway using the Docker image published to Docker Hub.
+
+GitHub
+   │
+   ▼
+GitHub Actions
+   │
+   ├── Build
+   ├── Test
+   └── Docker Build
+           │
+           ▼
+      Docker Hub
+           │
+           │ shopsphere:latest
+           ▼
+        Railway
+           │
+           ├── Spring Boot Application
+           │
+           └── MySQL Database
+           │
+           ▼
+       Public API
+
+# Deployment
+
+Platform:
+Railway
+
+Application:
+Spring Boot
+
+Container:
+Docker
+
+Docker Image:
+shahidjavadev/shopsphere:latest
+
+Database:
+Railway MySQL
+
+# 🗄️ Database Configuration
+
+The production application uses a MySQL database running on Railway.
+
+The application receives database configuration through environment variables.
+
+DB_URL
+DB_USERNAME
+DB_PASSWORD
+
+The production JDBC URL follows the Railway internal networking format:
+
+-jdbc:mysql://mysql.railway.internal:3306/railway
+
+The actual database credentials are stored as environment variables and are not committed to GitHub.
+
+# 🔐 Environment Variables
+
+Sensitive configuration is handled using environment variables.
+
+Application Variables
+DB_URL
+DB_USERNAME
+DB_PASSWORD
+JWT_SECRET
+JWT_EXPIRATION
+CI/CD Secrets
+
+Sensitive GitHub Actions credentials should be stored as GitHub repository secrets.
+
+Example:
+
+DOCKER_USERNAME
+DOCKER_PASSWORD
+JWT_SECRET
+
+# REST API Endpoints
+
+# Authentication
+
+POST /api/auth/register
+POST /api/auth/login
+
+# Categories
+GET    /api/categories
+GET    /api/categories/{id}
+POST   /api/categories
+PUT    /api/categories/{id}
+DELETE /api/categories/{id}
+
+# Products
 GET    /api/products
 GET    /api/products/{id}
 POST   /api/products
 PUT    /api/products/{id}
 DELETE /api/products/{id}
-```
 
-### Supports
+# Query Parameters
+page
+size
+sortBy
+direction
+category
+brand
+minPrice
+maxPrice
+keyword
 
-```
-?page=0
-&size=10
-&sortBy=price
-&direction=desc
-&category=Mobiles
-&brand=Apple
-&minPrice=50000
-&maxPrice=150000
-&keyword=iphone
-```
+Example:
+GET /api/products?page=0&size=10&sortBy=price&direction=desc
 
----
-
-## Cart
-
-```
+# Cart
 GET    /api/cart
 POST   /api/cart
 PUT    /api/cart/{id}
 DELETE /api/cart/{id}
-```
 
----
-
-## Orders
-
-```
+# Orders
 POST   /api/orders
 GET    /api/orders
 PUT    /api/orders/{id}/cancel
-```
 
----
+# Payments
+POST /api/payments
+GET  /api/payments/{id}
 
-## Payments
+# 🔑 Using JWT Authentication
 
-```
-POST   /api/payments
-GET    /api/payments/{id}
-```
+After successful login, the API returns a JWT token.
 
----
+For protected APIs, send the token in the request header:
 
-# ⚙️ Running the Project
+Authorization: Bearer <JWT_TOKEN>
 
-## Option 1 : Run using Docker (Recommended)
+Example:
 
-### Clone Repository
-
-```bash
-git clone https://github.com/SyedShahidAhamed/ShopSphere.git
-```
-
-### Navigate
-
-```bash
-cd ShopSphere
-```
-
-### Build the Project
-
-```bash
-mvn clean package
-```
-
-### Start Containers
-
-```bash
-docker compose up
-```
-
-Run in Background
-
-```bash
-docker compose up -d
-```
-
-Stop Containers
-
-```bash
-docker compose down
-```
-
-The application will be available at:
-
-```
-http://localhost:8080
-```
-
----
-
-# Option 2 : Run Locally
-
-Configure MySQL in
-
-```
-application.properties
-```
-
-Example
-
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/shopsphere
-spring.datasource.username=root
-spring.datasource.password=your_password
-```
-
-Run
-
-```bash
-mvn spring-boot:run
-```
-
----
+curl -X GET \
+  "https://renewed-delight-production-de66.up.railway.app/api/categories" \
+  -H "Authorization: Bearer <JWT_TOKEN>"
 
 # 📚 API Documentation
 
-### Swagger UI
+Swagger provides interactive API documentation.
 
-```
+Local Swagger
 http://localhost:8080/swagger-ui/index.html
-```
+Production Swagger
+https://renewed-delight-production-de66.up.railway.app/swagger-ui/index.html
+Production OpenAPI
+https://renewed-delight-production-de66.up.railway.app/v3/api-docs
 
-### OpenAPI Docs
+Swagger can be used to:
 
-```
-http://localhost:8080/v3/api-docs
-```
+-Explore endpoints
+-Send API requests
+-Test authentication
+-Test protected APIs
+-View request models
+-View response models
 
----
+# 🚀 Running the Project Locally
+Prerequisites
 
-# 📊 Project Status
+Install:
 
-✅ Authentication
+Java 21
+Maven
+MySQL
+Docker
+Docker Compose
+Git
 
-✅ Authorization
+1️⃣ Clone Repository
+git clone https://github.com/SyedShahidAhamed/ShopSphere.git
 
-✅ Product Module
+2️⃣ Navigate to Project
+cd ShopSphere
 
-✅ Category Module
+# 🐳 Option 1 — Docker Compose
 
-✅ Cart Module
+Build the project:
 
-✅ Order Module
+mvn clean package
 
-✅ Payment Module
+Start the containers:
 
-✅ Pagination
+docker compose up
 
-✅ Sorting
+Run in background:
 
-✅ Dynamic Filtering
+docker compose up -d
 
-✅ Validation
+Check running containers:
 
-✅ Exception Handling
+docker ps
 
-✅ JWT Security
+View logs:
 
-✅ Testing
+docker compose logs -f
 
-✅ Docker
+Stop containers:
 
-✅ Docker Compose
+docker compose down
 
----
-# 🔄 CI/CD Pipeline
+Application:
 
-ShopSphere uses GitHub Actions to automate the build, testing, Docker image creation, and deployment workflow.
+http://localhost:8080
 
-```text
-Developer
-    │
-    ▼
-Git Push to main
-    │
-    ▼
-GitHub Actions
-    │
-    ├── Checkout Repository
-    │
-    ├── Setup Java 21
-    │
-    ├── Maven Build & Tests
-    │       └── mvn clean verify
-    │
-    ├── Build Docker Image
-    │
-    ├── Push Image to Docker Hub
-    │
-    ▼
-Docker Hub
-    │
-    │  shopsphere:latest
-    ▼
-Railway
-    │
-    ├── Detects new Docker image
-    │
-    └── Automatically redeploys
-    │
-    ▼
-🚀 Production Deployment
 
----
+# ☕ Option 2 — Run Spring Boot Locally
 
-# 🔮 Future Enhancements
+Configure MySQL in your local environment.
+
+Example:
+
+spring.datasource.url=jdbc:mysql://localhost:3306/shopsphere
+spring.datasource.username=root
+spring.datasource.password=your_password
+
+Then run:
+
+mvn spring-boot:run
+
+Application:
+
+http://localhost:8080
+
+# 🔍 API Testing
+
+The APIs can be tested using:
+
+Swagger UI
+Postman
+cURL
+
+For protected endpoints:
+
+Authorization: Bearer <JWT_TOKEN>
+
+# 📈 Complete Project Workflow
+
+                    Developer
+                        │
+                        ▼
+                   GitHub Repo
+                        │
+                   git push
+                        │
+                        ▼
+                GitHub Actions
+                        │
+              ┌─────────┴─────────┐
+              │                   │
+              ▼                   ▼
+        Maven Build           Automated Tests
+              │                   │
+              └─────────┬─────────┘
+                        │
+                       PASS
+                        │
+                        ▼
+                  Docker Build
+                        │
+                        ▼
+                   Docker Hub
+                        │
+                        ▼
+              shopsphere:latest
+                        │
+                        ▼
+                    Railway
+                ┌───────┴────────┐
+                │                │
+                ▼                ▼
+          Spring Boot          MySQL
+            API              Database
+                │
+                ▼
+          Public REST API
+                │
+                ▼
+             Swagger
+
+# 🔮 Future Improvements
+
+The following features are planned for future versions of ShopSphere:
 
 - Redis Caching
 - Email Notifications
-- Payment Gateway Integration (Razorpay/Stripe)
-- CI/CD using GitHub Actions
-- Cloud Deployment (AWS / Render / Railway)
+- Razorpay Payment Gateway Integration
+- Stripe Payment Gateway Integration
 - React Frontend
+- Advanced Product Search
+- Rate Limiting
+- Centralized Logging
+- Monitoring and Observability
 - Microservices Architecture
 - Kubernetes Deployment
-
----
+- AWS Cloud Deployment
 
 # 👨‍💻 Author
 
-**Syed Shahid Ahamed**
+## Syed Shahid Ahamed
 
-- GitHub: https://github.com/SyedShahidAhamed
-- LinkedIn: https://www.linkedin.com/in/syed-shahid-ahamed-0717423a9/
+Java Full Stack Developer | Spring Boot | REST APIs | Docker | CI/CD
 
----
+### GitHub
 
-# ⭐ If you found this project useful, don't forget to star the repository!
+https://github.com/SyedShahidAhamed
+
+### LinkedIn
+
+https://www.linkedin.com/in/syed-shahid-ahamed-0717423a9/
