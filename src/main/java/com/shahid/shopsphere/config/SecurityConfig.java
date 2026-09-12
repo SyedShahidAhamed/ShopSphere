@@ -16,6 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.shahid.shopsphere.security.JwtAuthenticationFilter;
+import com.shahid.shopsphere.security.RateLimitFilter;
 import com.shahid.shopsphere.service.CustomUserDetailsService;
 @EnableMethodSecurity
 @Configuration
@@ -23,11 +24,13 @@ import com.shahid.shopsphere.service.CustomUserDetailsService;
 public class SecurityConfig {
      private final CustomUserDetailsService customUserDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final RateLimitFilter rateLimitFilter;
 
     public SecurityConfig(CustomUserDetailsService customUserDetailsService,
-            JwtAuthenticationFilter jwtAuthenticationFilter) {
+            JwtAuthenticationFilter jwtAuthenticationFilter,RateLimitFilter rateLimitFilter) {
         this.customUserDetailsService = customUserDetailsService;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.rateLimitFilter = rateLimitFilter;
     }
     @Bean
      SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
@@ -35,9 +38,16 @@ public class SecurityConfig {
         return http
                    .csrf(csrf->csrf.disable())
                    .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                   .authorizeHttpRequests(auth->auth.requestMatchers("/api/auth/**" ,"/api/products/**", "/api/categories/**","/v3/api-docs/**","/swagger-ui/**","/swagger-ui.html","/h2-console/**").permitAll().anyRequest().authenticated())
+                   .authorizeHttpRequests(auth->auth.requestMatchers("/api/auth/**" ,"/api/products/**", "/api/categories/**","/v3/api-docs/**","/swagger-ui/**","/swagger-ui.html","/h2-console/**","/api/redis/**").permitAll().anyRequest().authenticated())
                    .authenticationProvider(authenticationProvider())
-                   .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                     .addFilterBefore(
+                     jwtAuthenticationFilter,
+                UsernamePasswordAuthenticationFilter.class
+        )
+        .addFilterBefore(
+                rateLimitFilter,
+                JwtAuthenticationFilter.class
+        )
                    .build();
                    
                    

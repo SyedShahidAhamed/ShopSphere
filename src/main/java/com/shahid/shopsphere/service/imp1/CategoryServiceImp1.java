@@ -3,6 +3,10 @@ package com.shahid.shopsphere.service.imp1;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.shahid.shopsphere.dto.category.CategoryRequest;
@@ -25,6 +29,7 @@ public class CategoryServiceImp1 implements CategoryService {
     private final CategoryMapper categoryMapper;
    
    @Override
+   @CacheEvict(value="categories",allEntries=true)
     public CategoryResponse createCategory(CategoryRequest request)
     {
         //fetch from db that category already exists
@@ -46,6 +51,7 @@ public class CategoryServiceImp1 implements CategoryService {
         
     }
    @Override
+   @Cacheable(value="categories")
     public List<CategoryResponse> getAllCategories()
     {
         return categoryRepository.findAll()
@@ -55,6 +61,7 @@ public class CategoryServiceImp1 implements CategoryService {
                                     
     }
    @Override
+     @Cacheable(value="category",key="#id")
     public CategoryResponse getCategoryById(Long id)
     {
       Category category = categoryRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Category Not Found With Id:" + id));
@@ -63,6 +70,10 @@ public class CategoryServiceImp1 implements CategoryService {
     }
     
     @Override
+    @Caching(
+      put = @CachePut(value="category",key ="#id"),
+      evict = @CacheEvict(value="categories",allEntries=true)
+   )
     public  CategoryResponse updateCategory(Long id,CategoryRequest request){
      
          Category category = categoryRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Category Not Found With Id:" + id));
@@ -77,6 +88,12 @@ public class CategoryServiceImp1 implements CategoryService {
 
     }
     @Override
+    @Caching(
+        evict={
+            @CacheEvict(value="category",key="#id"),
+            @CacheEvict(value="categories",allEntries=true)
+        }
+    )
     public void deleteCategory(Long id)
     {
         Category existingCategory = categoryRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Category Not Found With Id:" + id));

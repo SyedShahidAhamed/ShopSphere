@@ -3,6 +3,8 @@ package com.shahid.shopsphere.service.imp1;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -24,6 +26,9 @@ import com.shahid.shopsphere.service.ProductService;
 import com.shahid.shopsphere.specifications.ProductSpecification;
 import com.shahid.shopsphere.util.SortUtil;
 
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
+
 import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
@@ -35,6 +40,7 @@ public class ProductServiceImp1 implements ProductService {
    
 
   @Override
+  @CacheEvict(value="products",allEntries=true)
 public ProductResponse createProduct(ProductRequest request) {
  //find name
     productRepository.findByName(request.getName())
@@ -123,6 +129,7 @@ direction = direction.trim().toLowerCase();
    }
 
    @Override
+   @Cacheable(value="product",key="#id")
    public  ProductResponse getProductById(Long id){
 
       Product product = productRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Product Not Found With Id:" +id));
@@ -130,6 +137,10 @@ direction = direction.trim().toLowerCase();
       return productMapper.toProductResponse(product);
    }
     @Override
+    @Caching(
+      put = @CachePut(value="product",key="#id"),
+      evict =@CacheEvict(value="products",allEntries = true)
+    )
     public ProductResponse updateProduct(Long id, ProductRequest request){
       //fetch product
        Product product = productRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Product Not Found With Id:" +id));
@@ -149,6 +160,12 @@ direction = direction.trim().toLowerCase();
     }
 
     @Override
+    @Caching(
+      evict={
+         @CacheEvict(value="product",key="#id"),
+         @CacheEvict(value="products",allEntries=true)
+      }
+    )
 public void deleteProduct(Long id) {
 
     Product product = productRepository.findById(id)

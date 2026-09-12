@@ -1,5 +1,6 @@
 package com.shahid.shopsphere.dto.category;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -13,7 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CategoryResponse {
+public class CategoryResponse implements  Serializable{
+    private static final long serialVersionUID = 1L;
     @Schema(description="Unique category Id",example="2")
     private Long id;
     @Schema(description="Category description",example="A best quality mobiles")

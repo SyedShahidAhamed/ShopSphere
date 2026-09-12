@@ -2,7 +2,7 @@ package com.shahid.shopsphere.dto.product;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
+import java.io.Serializable;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
@@ -11,7 +11,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProductResponse {
+public class ProductResponse implements Serializable{
+     private static final long serialVersionUID = 1L;
+     
      @Schema(description="Unique Product Id",example="1")
     private Long id;
     @Schema(description="Product name",example="Iphone 16")

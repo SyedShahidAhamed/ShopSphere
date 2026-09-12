@@ -15,11 +15,17 @@ services:
       - mysql-data:/var/lib/mysql
 
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pking@786"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${DB_PASSWORD}"]
       interval: 10s
       timeout: 5s
-      retries: 10
+      retries: 1
+  
+  redis:
+    image: redis:7
+    container_name: shopsphere-redis
 
+    ports:
+      - "6379:6379"
 
   shopsphere:
     build:
@@ -32,13 +38,17 @@ services:
       DB_URL: ${DB_URL}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
       JWT_SECRET: ${JWT_SECRET}
       JWT_EXPIRATION: ${JWT_EXPIRATION}
+     
 
     depends_on:
       mysql:
         condition: service_healthy
-
+      redis:
+        condition: service_started
     ports:
       - "8080:8080"
 
