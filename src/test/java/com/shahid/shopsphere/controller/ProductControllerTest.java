@@ -35,7 +35,10 @@ import com.shahid.shopsphere.service.CustomUserDetailsService;
 import com.shahid.shopsphere.service.JwtService;
 import com.shahid.shopsphere.service.ProductService;
 
-@WebMvcTest(ProductController.class)
+@WebMvcTest(
+    value = ProductController.class,
+    properties = "redis.pubsub.enabled=false"
+)
 @AutoConfigureMockMvc(addFilters=false)
 class ProductControllerTest {
 
