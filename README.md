@@ -13,13 +13,14 @@
   <img src="https://img.shields.io/badge/Spring%20Security-JWT-green?logo=springsecurity" alt="Spring Security">
   <img src="https://img.shields.io/badge/MySQL-Database-blue?logo=mysql" alt="MySQL">
   <img src="https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker" alt="Docker">
+  <img src="https://img.shields.io/badge/Redis-7-red?logo=redis" alt="Redis">
   <img src="https://img.shields.io/badge/Deployment-Railway-purple" alt="Railway">
 </p>
----
 
-## 📌 About the Project**
 
-****ShopSphere**** is a full-featured E-Commerce backend REST API developed using ****Java and Spring Boot****.
+## 📌 About the Project
+
+**ShopSphere** is a full-featured E-Commerce backend REST API developed using ****Java and Spring Boot****.
 
 The project demonstrates real-world backend development practices including:
 
@@ -62,19 +63,19 @@ The project demonstrates real-world backend development practices including:
 
 ---
 
-# 🌐 Live Application**
+# 🌐 Live Application
 
-### 🚀 Production API**
+### 🚀 Production API
 
 ****Railway****
 
 https://renewed-delight-production-de66.up.railway.app
 
-### 📚 Production Swagger UI**
+### 📚 Production Swagger UI
 
 https://renewed-delight-production-de66.up.railway.app/swagger-ui/index.html
 
-### 📄 Production OpenAPI**
+### 📄 Production OpenAPI
 
 https://renewed-delight-production-de66.up.railway.app/v3/api-docs
 
@@ -82,9 +83,9 @@ https://renewed-delight-production-de66.up.railway.app/v3/api-docs
 
 ---
 
-# ✨ Features**
+# ✨ Features
 
-## 🔐 Authentication & Authorization**
+## 🔐 Authentication & Authorization
 
 - User Registration
 
@@ -114,7 +115,7 @@ https://renewed-delight-production-de66.up.railway.app/v3/api-docs
 
 ---
 
-## 📦 Product Management**
+## 📦 Product Management
 
 - Create Product
 
@@ -142,7 +143,7 @@ https://renewed-delight-production-de66.up.railway.app/v3/api-docs
 
 - Maximum Price Filtering
 
-### Example Queries**
+### Example Queries
 
 ```http
 
@@ -176,7 +177,7 @@ GET /api/products?keyword=iphone
 
 ---
 
-## 📂 Category Management**
+## 📂 Category Management
 
 - Create Category
 
@@ -190,7 +191,7 @@ GET /api/products?keyword=iphone
 
 ---
 
-## 🛒 Cart Management**
+## 🛒 Cart Management
 
 - Add Product to Cart
 
@@ -204,7 +205,7 @@ GET /api/products?keyword=iphone
 
 ---
 
-## 📦 Order Management**
+## 📦 Order Management
 
 - Place Order
 
@@ -218,11 +219,11 @@ GET /api/products?keyword=iphone
 
 ---
 
-## 💳 Payment Module**
+## 💳 Payment Module
 
 The project contains a payment module with payment entities and REST APIs.
 
-### Implemented**
+### Implemented
 
 - Payment Entity
 
@@ -359,7 +360,7 @@ The project includes hands-on implementation and learning of:
 
 ---
 
-# 🛡️ Security Architecture**
+# 🛡️ Security Architecture
 
 ShopSphere uses ****Spring Security + JWT**** for authentication and authorization.
 
@@ -429,7 +430,7 @@ ShopSphere uses ****Spring Security + JWT**** for authentication and authorizati
 
 ```
 
-### Security Components**
+### Security Components
 
 ```text
 
@@ -451,7 +452,7 @@ AuthenticationManager
 
 ---
 
-# 🏗️ Application Architecture**
+# 🏗️ Application Architecture
 
 ShopSphere follows a clean layered architecture.
 
@@ -523,83 +524,107 @@ ShopSphere follows a clean layered architecture.
 
 ---
 
-# 📁 Project Structure**
+# 📁 Project Structure
 
 ```text
 
-                    src/main/java/com/shahid/shopsphere
-
-                    │
-
-                    ├── config
-
-                    │   └── SecurityConfig.java
-
-                    │
-
-                    ├── controller
-
-                    │   ├── AuthController.java
-
-                    │   ├── ProductController.java
-
-                    │   ├── CategoryController.java
-
-                    │   ├── CartController.java
-
-                    │   ├── OrderController.java
-
-                    │   └── PaymentController.java
-
-                    │
-
-                    ├── dto
-
-                    │
-
-                    ├── entity
-
-                    │
-
-                    ├── exception
-
-                    │
-
-                    ├── mapper
-
-                    │
-
-                    ├── repository
-
-                    │
-
-                    ├── security
-
-                    │   └── JwtAuthenticationFilter.java
-
-                    │
-
-                    ├── service
-
-                    │
-
-                    ├── specifications
-
-                    │
-
-                    ├── util
-
-                    │
-
-                    └── ShopSphereApplication.java
+                                          ShopSphere/
+                                          │
+                                          ├── .github/
+                                          │   └── build.yml
+                                          │
+                                          ├── src/
+                                          │   ├── main/
+                                          │   │   ├── java/
+                                          │   │   │   └── com/
+                                          │   │   │       └── shahid/
+                                          │   │   │           └── shopsphere/
+                                          │   │   │               │
+                                          │   │   │               ├── ShopatzApplication.java
+                                          │   │   │               │
+                                          │   │   │               ├── controller/
+                                          │   │   │               │
+                                          │   │   │               ├── entity/
+                                          │   │   │               │
+                                          │   │   │               ├── repository/
+                                          │   │   │               │
+                                          │   │   │               ├── service/
+                                          │   │   │               │   ├── impl/
+                                          │   │   │               │   ├── AuthenticationFacade.java
+                                          │   │   │               │   ├── CartService.java
+                                          │   │   │               │   ├── CategoryService.java
+                                          │   │   │               │   ├── CustomUserDetailsService.java
+                                          │   │   │               │   ├── JwtService.java
+                                          │   │   │               │   ├── OrderService.java
+                                          │   │   │               │   ├── PaymentService.java
+                                          │   │   │               │   ├── ProductService.java
+                                          │   │   │               │   ├── RedisEventPublisher.java
+                                          │   │   │               │   ├── RedisEventSubscriber.java
+                                          │   │   │               │   ├── RedisLockService.java
+                                          │   │   │               │   ├── RedisPipelineService.java
+                                          │   │   │               │   ├── UserService.java
+                                          │   │   │               │   └── ...
+                                          │   │   │               │
+                                          │   │   │               ├── security/
+                                          │   │   │               │   ├── JwtAuthenticationFilter.java
+                                          │   │   │               │   └── RateLimitFilter.java
+                                          │   │   │               │
+                                          │   │   │               ├── config/
+                                          │   │   │               │   ├── OpenApiConfig.java
+                                          │   │   │               │   ├── RedisConfig.java
+                                          │   │   │               │   ├── RedisPubSubConfig.java
+                                          │   │   │               │   └── SecurityConfig.java
+                                          │   │   │               │
+                                          │   │   │               ├── dto/
+                                          │   │   │               │
+                                          │   │   │               ├── exception/
+                                          │   │   │               │
+                                          │   │   │               ├── mapper/
+                                          │   │   │               │
+                                          │   │   │               ├── specifications/
+                                          │   │   │               │
+                                          │   │   │               └── util/
+                                          │   │   │
+                                          │   │   └── resources/
+                                          │   │       ├── static/
+                                          │   │       ├── templates/
+                                          │   │       ├── application.properties
+                                          │   │       └── application-dev.properties
+                                          │   │
+                                          │   └── test/
+                                          │       ├── java/
+                                          │       │   └── com/
+                                          │       │       └── shahid/
+                                          │       │           └── shopsphere/
+                                          │       │               ├── controller/
+                                          │       │               │   ├── ProductControllerTest.java
+                                          │       │               │   └── ProductIntegrationTest.java
+                                          │       │               ├── repository/
+                                          │       │               ├── service/
+                                          │       │               └── ShopatzApplicationTests.java
+                                          │       │
+                                          │       └── resources/
+                                          │           └── application-test.properties
+                                          │
+                                          ├── .env
+                                          ├── .env.example
+                                          ├── .gitignore
+                                          ├── .gitattributes
+                                          ├── Dockerfile
+                                          ├── docker-compose.yml
+                                          ├── HELP.md
+                                          ├── mvnw
+                                          ├── mvnw.cmd
+                                          ├── pom.xml
+                                          └── README.md
 
 ```
 
 ---
 
-# 🛠️ Technology Stack**
+# 🛠️ Technology Stack
 
-## Backend**
+## Backend
 
 \| Technology | Usage |
 
@@ -623,7 +648,7 @@ ShopSphere follows a clean layered architecture.
 
 \| Bean Validation | Request Validation |
 
-## Database**
+## Database
 
 \| Technology | Usage |
 
@@ -634,7 +659,7 @@ ShopSphere follows a clean layered architecture.
 \| H2 | Testing Database |
 | Redis | Caching, Rate Limiting, Distributed Locking |
 
-## Testing**
+## Testing
 
 - JUnit 5
 
@@ -646,7 +671,7 @@ ShopSphere follows a clean layered architecture.
 
 - Integration Testing
 
-## DevOps & Deployment**
+## DevOps & Deployment
 
 - Docker
 
@@ -658,7 +683,7 @@ ShopSphere follows a clean layered architecture.
 
 - Railway
 
-## Documentation**
+## Documentation
 
 - Swagger
 
@@ -666,11 +691,11 @@ ShopSphere follows a clean layered architecture.
 
 ---
 
-# 🧪 Testing**
+# 🧪 Testing
 
 ShopSphere includes automated testing at multiple levels.
 
-## Unit Testing**
+## Unit Testing
 
 Business logic is tested using:
 
@@ -678,7 +703,7 @@ Business logic is tested using:
 
 - Mockito
 
-## Repository Testing**
+## Repository Testing
 
 Repository and persistence functionality can be tested using:
 
@@ -686,7 +711,7 @@ Repository and persistence functionality can be tested using:
 
 - H2 Database
 
-## Controller Testing**
+## Controller Testing
 
 REST controllers are tested using:
 
@@ -694,11 +719,11 @@ REST controllers are tested using:
 
 - MockMvc
 
-## Integration Testing**
+## Integration Testing
 
 Integration tests verify the interaction between different application layers.
 
-### Maven Verification**
+### Maven Verification
 
 ```bash
 
@@ -744,7 +769,7 @@ ShopSphere runs as a multi-container Docker environment with separate containers
 - **Redis** — caching, rate limiting, distributed locks, and inventory consistency (`:6379`)
 - Docker Compose provides networking between the services using service names such as `mysql` and `redis`.
 
-### Docker Features**
+### Docker Features
 
 - Dockerfile
 
@@ -762,7 +787,7 @@ ShopSphere runs as a multi-container Docker environment with separate containers
 
 ---
 
-# 🔄 CI/CD Pipeline**
+# 🔄 CI/CD Pipeline
 
 ShopSphere uses ****GitHub Actions**** for automated build and testing.
 
@@ -842,7 +867,7 @@ The CI/CD pipeline also builds and publishes the Docker image.
 
 ```
 
-### GitHub Actions Tasks**
+### GitHub Actions Tasks
 
 - Repository checkout
 
@@ -860,7 +885,7 @@ The CI/CD pipeline also builds and publishes the Docker image.
 
 - Docker image push
 
-### Maven Verification**
+### Maven Verification
 
 ```bash
 
@@ -870,11 +895,11 @@ mvn clean verify
 
 ---
 
-# 🐳 Docker Hub**
+# 🐳 Docker Hub
 
 The ShopSphere Docker image is published to Docker Hub.
 
-### Image**
+### Image
 
 ```text
 
@@ -882,7 +907,7 @@ shahidjavadev/shopsphere:latest
 
 ```
 
-### Pull Image**
+### Pull Image
 
 ```bash
 
@@ -890,7 +915,7 @@ docker pull shahidjavadev/shopsphere:latest
 
 ```
 
-### Run Container**
+### Run Container
 
 ```bash
 
@@ -900,7 +925,7 @@ docker run -p 8080:8080 shahidjavadev/shopsphere:latest
 
 ---
 
-# ☁️ Railway Deployment**
+# ☁️ Railway Deployment
 
 ShopSphere is deployed to Railway using the Docker image published to Docker Hub.
 
@@ -952,7 +977,7 @@ ShopSphere is deployed to Railway using the Docker image published to Docker Hub
 
 ```
 
-### Deployment Details**
+### Deployment Details
 
 \| Component | Technology |
 
@@ -970,13 +995,13 @@ ShopSphere is deployed to Railway using the Docker image published to Docker Hub
 
 ---
 
-# 🗄️ Database Configuration**
+# 🗄️ Database Configuration
 
 The production application uses a ****MySQL database running on Railway****.
 
 The application receives database configuration through environment variables.
 
-### Database Variables**
+### Database Variables
 
 ```text
 
@@ -988,7 +1013,7 @@ DB_PASSWORD
 
 ```
 
-### Railway Internal JDBC URL**
+### Railway Internal JDBC URL
 
 ```text
 
@@ -1000,11 +1025,11 @@ jdbc:mysql://mysql.railway.internal:3306/railway
 
 ---
 
-# 🔐 Environment Variables**
+# 🔐 Environment Variables
 
 Sensitive configuration is handled using environment variables.
 
-## Application Variables**
+## Application Variables
 
 ```text
 
@@ -1020,7 +1045,7 @@ JWT_EXPIRATION
 
 ```
 
-## CI/CD Secrets**
+## CI/CD Secrets
 
 Sensitive GitHub Actions credentials should be stored as GitHub repository secrets.
 
@@ -1038,9 +1063,9 @@ JWT_SECRET
 
 ---
 
-# 📡 REST API Endpoints**
+# 📡 REST API Endpoints
 
-## 🔑 Authentication**
+## 🔑 Authentication
 
 \| Method | Endpoint |
 
@@ -1052,7 +1077,7 @@ JWT_SECRET
 
 ---
 
-## 📂 Categories**
+## 📂 Categories
 
 \| Method | Endpoint |
 
@@ -1070,7 +1095,7 @@ JWT_SECRET
 
 ---
 
-## 📦 Products**
+## 📦 Products
 
 \| Method | Endpoint |
 
@@ -1086,7 +1111,7 @@ JWT_SECRET
 
 \| `DELETE` | `/api/products/{id}` |
 
-### Product Query Parameters**
+### Product Query Parameters
 
 \| Parameter | Purpose |
 
@@ -1110,7 +1135,7 @@ JWT_SECRET
 
 \| `keyword` | Keyword search |
 
-### Example**
+### Example
 
 ```http
 
@@ -1120,7 +1145,7 @@ GET /api/products?page=0&size=10&sortBy=price&direction=desc
 
 ---
 
-## 🛒 Cart**
+## 🛒 Cart
 
 \| Method | Endpoint |
 
@@ -1136,7 +1161,7 @@ GET /api/products?page=0&size=10&sortBy=price&direction=desc
 
 ---
 
-## 📦 Orders**
+## 📦 Orders
 
 \| Method | Endpoint |
 
@@ -1150,7 +1175,7 @@ GET /api/products?page=0&size=10&sortBy=price&direction=desc
 
 ---
 
-## 💳 Payments**
+## 💳 Payments
 
 \| Method | Endpoint |
 
@@ -1162,7 +1187,7 @@ GET /api/products?page=0&size=10&sortBy=price&direction=desc
 
 ---
 
-# 🔑 Using JWT Authentication**
+# 🔑 Using JWT Authentication
 
 After successful login, the API returns a JWT token.
 
@@ -1174,7 +1199,7 @@ Authorization: Bearer \<JWT_TOKEN>
 
 ```
 
-### cURL Example**
+### CURL Example
 
 ```bash
 
@@ -1190,19 +1215,19 @@ Protected endpoints use the authenticated user's role and method-level authoriza
 
 ---
 
-# 📚 API Documentation**
+# 📚 API Documentation
 
 Swagger provides interactive API documentation.
 
-### Local Swagger**
+### Local Swagger
 
 http://localhost:8080/swagger-ui/index.html
 
-### Production Swagger**
+### Production Swagger
 
 https://renewed-delight-production-de66.up.railway.app/swagger-ui/index.html
 
-### Production OpenAPI**
+### Production OpenAPI
 
 https://renewed-delight-production-de66.up.railway.app/v3/api-docs
 
@@ -1222,9 +1247,9 @@ Swagger can be used to:
 
 ---
 
-# 🚀 Running the Project Locally**
+# 🚀 Running the Project Locally
 
-## Prerequisites**
+## Prerequisites
 
 Install:
 
@@ -1242,7 +1267,7 @@ Install:
 
 ---
 
-## 1️⃣ Clone Repository**
+## 1️⃣ Clone Repository
 
 ```bash
 
@@ -1250,7 +1275,7 @@ git clone https://github.com/SyedShahidAhamed/ShopSphere.git
 
 ```
 
-## 2️⃣ Navigate to Project**
+## 2️⃣ Navigate to Project
 
 ```bash
 
@@ -1260,9 +1285,9 @@ cd ShopSphere
 
 ---
 
-# 🐳 Option 1 — Docker Compose**
+# 🐳 Option 1 — Docker Compose
 
-### Build the Project**
+### Build the Project
 
 ```bash
 
@@ -1270,7 +1295,7 @@ mvn clean package
 
 ```
 
-### Start Containers**
+### Start Containers
 
 ```bash
 
@@ -1278,7 +1303,7 @@ docker compose up
 
 ```
 
-### Run in Background**
+### Run in Background
 
 ```bash
 
@@ -1286,7 +1311,7 @@ docker compose up -d
 
 ```
 
-### Check Running Containers**
+### Check Running Containers
 
 ```bash
 
@@ -1294,7 +1319,7 @@ docker ps
 
 ```
 
-### View Logs**
+### View Logs
 
 ```bash
 
@@ -1302,7 +1327,7 @@ docker compose logs -f
 
 ```
 
-### Stop Containers**
+### Stop Container
 
 ```bash
 
@@ -1310,17 +1335,17 @@ docker compose down
 
 ```
 
-### Application**
+### Application
 
 http://localhost:8080
 
 ---
 
-# ☕ Option 2 — Run Spring Boot Locally**
+# ☕ Option 2 — Run Spring Boot Locally
 
 Configure MySQL in your local environment.
 
-### Example Configuration**
+### Example Configuration
 
 ```properties
 
@@ -1340,13 +1365,13 @@ mvn spring-boot:run
 
 ```
 
-### Application**
+### Application
 
 http://localhost:8080
 
 ---
 
-# 🔍 API Testing**
+# 🔍 API Testing
 
 The APIs can be tested using:
 
@@ -1366,7 +1391,7 @@ Authorization: Bearer \<JWT_TOKEN>
 
 ---
 
-# 📈 Complete Project Workflow**
+# 📈 Complete Project Workflow
 
 ```text
 
@@ -1454,7 +1479,7 @@ Authorization: Bearer \<JWT_TOKEN>
 
 ---
 
-# 📊 Project Status**
+# 📊 Project Status
 
 \| Module | Status |
 
@@ -1526,7 +1551,7 @@ Authorization: Bearer \<JWT_TOKEN>
 
 ---
 
-# 🔮 Future Improvements**
+# 🔮 Future Improvements
 
 The following features can be considered for future versions:
 
@@ -1560,28 +1585,28 @@ The following features can be considered for future versions:
 
 ---
 
-# 👨‍💻 Author**
+# 👨‍💻 Author
 
-## Syed Shahid Ahamed**
+## Syed Shahid Ahamed
 
 Computer Science / Software Engineering Student and Backend Developer focused on ****Java, Spring Boot, REST APIs, SQL, Redis, Docker, and backend development****.
 
-### GitHub**
+### GitHub
 
 https://github.com/SyedShahidAhamed
 
-### LinkedIn**
+### LinkedIn
 
 https://www.linkedin.com/in/syed-shahid-ahamed-0717423a9/
 
 ---
 
-# ⭐ Support**
+# ⭐ Support
 
 If you found this project useful or interesting, consider giving the repository a ⭐ on GitHub.
 
 ---
 
-## 📄 License**
+## 📄 License
 
 This project is intended for learning, portfolio, and demonstration purposes.
