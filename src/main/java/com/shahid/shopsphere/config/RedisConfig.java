@@ -21,11 +21,6 @@ import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 @Configuration
-@ConditionalOnProperty(
-    name = "redis.pubsub.enabled",
-    havingValue = "true",
-    matchIfMissing = true
-)
 @EnableCaching
 public class RedisConfig {
 
