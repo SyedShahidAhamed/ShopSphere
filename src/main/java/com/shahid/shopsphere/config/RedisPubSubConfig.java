@@ -13,12 +13,13 @@ import com.shahid.shopsphere.service.RedisEventSubscriber;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
+@RequiredArgsConstructor
 @ConditionalOnProperty(
     name = "redis.pubsub.enabled",
     havingValue = "true",
     matchIfMissing = true
 )
-@RequiredArgsConstructor
+
 public class RedisPubSubConfig {
 
     private final RedisEventSubscriber redisEventSubscriber;

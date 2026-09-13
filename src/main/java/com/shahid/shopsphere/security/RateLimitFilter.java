@@ -3,6 +3,7 @@ package com.shahid.shopsphere.security;
 import java.io.IOException;
 import java.time.Duration;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -18,8 +19,11 @@ import lombok.RequiredArgsConstructor;
 public class RateLimitFilter extends OncePerRequestFilter {
 
     private final StringRedisTemplate redisTemplate;
-
-    private static final int MAX_REQUESTS = 20;
+    
+     @Value("${rate-limit.enabled:true}")
+    private boolean rateLimitEnabled;
+    
+    private static final int MAX_REQUESTS = 100;
     private static final Duration TIME_WINDOW = Duration.ofMinutes(1);
 
     @Override
@@ -28,6 +32,12 @@ public class RateLimitFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain)
             throws ServletException, IOException {
+
+         // Skip Redis rate limiting when disabled
+        if (!rateLimitEnabled) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
         String clientIp = request.getRemoteAddr();
 

@@ -11,7 +11,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtService {
-    @Value("${JWT.SECRET}")//inject from application.properties
+    @Value("${jwt.secret}")//inject from application.properties
     private String secretKey;
     @Value("${jwt.expiration}")
     private long jwtExpiration;

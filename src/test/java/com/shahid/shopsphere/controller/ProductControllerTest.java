@@ -31,13 +31,17 @@ import com.shahid.shopsphere.dto.page.PageResponse;
 import com.shahid.shopsphere.dto.product.ProductRequest;
 import com.shahid.shopsphere.dto.product.ProductResponse;
 import com.shahid.shopsphere.security.JwtAuthenticationFilter;
+import com.shahid.shopsphere.security.RateLimitFilter;
 import com.shahid.shopsphere.service.CustomUserDetailsService;
 import com.shahid.shopsphere.service.JwtService;
 import com.shahid.shopsphere.service.ProductService;
 
 @WebMvcTest(
     value = ProductController.class,
-    properties = "redis.pubsub.enabled=false"
+    properties = {
+        "redis.pubsub.enabled=false",
+        "jwt.secret=test-secret-key-for-shopsphere-testing-only-12345678901234567890"
+    }
 )
 @AutoConfigureMockMvc(addFilters=false)
 class ProductControllerTest {
@@ -59,6 +63,9 @@ class ProductControllerTest {
 
     @MockitoBean
     private CustomUserDetailsService userDetailsService;
+
+    @MockitoBean
+private RateLimitFilter rateLimitFilter;
 
     @Test
     @WithMockUser(username="admin",roles ="ADMIN")
