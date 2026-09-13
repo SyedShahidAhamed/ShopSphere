@@ -1,33 +1,20 @@
-# 🛒 ShopSphere — E-Commerce REST API**
+# 🛒 ShopSphere — E-Commerce REST API
 
-\<p *align*="center">
+<p align="center">
+  <b>A production-oriented E-Commerce REST API built with Java, Spring Boot, Spring Security, JWT, Spring Data JPA, MySQL, Redis, Docker, GitHub Actions, Docker Hub, and Railway.</b>
+</p>
 
-  \<b>A production-oriented E-Commerce REST API built with Java, Spring Boot, Spring Security, JWT, Spring Data JPA, MySQL, Redis, Docker, GitHub Actions, Docker Hub, and Railway.\</b>
-
-\</p>
-
-\<p *align*="center">
-
-  \<a href="https://github.com/SyedShahidAhamed/ShopSphere">
-
-    \<img src="https://img.shields.io/badge/GitHub-ShopSphere-black?logo=github" alt="GitHub">
-
-  \</a>
-
-  \<img src="https://img.shields.io/badge/Java-21-orange?logo=openjdk" alt="Java 21">
-
-  \<img src="https://img.shields.io/badge/Spring%20Boot-3-brightgreen?logo=springboot" alt="Spring Boot">
-
-  \<img src="https://img.shields.io/badge/Spring%20Security-JWT-green?logo=springsecurity" alt="Spring Security">
-
-  \<img src="https://img.shields.io/badge/MySQL-Database-blue?logo=mysql" alt="MySQL">
-
-  \<img src="https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker" alt="Docker">
-
-  \<img src="https://img.shields.io/badge/Deployment-Railway-purple" alt="Railway">
-
-\</p>
-
+<p align="center">
+  <a href="https://github.com/SyedShahidAhamed/ShopSphere">
+    <img src="https://img.shields.io/badge/GitHub-ShopSphere-black?logo=github" alt="GitHub">
+  </a>
+  <img src="https://img.shields.io/badge/Java-21-orange?logo=openjdk" alt="Java 21">
+  <img src="https://img.shields.io/badge/Spring%20Boot-3-brightgreen?logo=springboot" alt="Spring Boot">
+  <img src="https://img.shields.io/badge/Spring%20Security-JWT-green?logo=springsecurity" alt="Spring Security">
+  <img src="https://img.shields.io/badge/MySQL-Database-blue?logo=mysql" alt="MySQL">
+  <img src="https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker" alt="Docker">
+  <img src="https://img.shields.io/badge/Deployment-Railway-purple" alt="Railway">
+</p>
 ---
 
 ## 📌 About the Project**
